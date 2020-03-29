@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+body {
+  font:  400 14px 'Poppins', sans-serif;
+  background: #D5D5D7;
+  -webkit-font-smoothing: antialiased;
+}
+
+input, button {
+  font: 400 18px 'Poppins', sans-serif;
+}
+
+textarea {
+  font: 400 14px 'Poppins', sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
