@@ -24,6 +24,20 @@ export default function Profile() {
     });
   }, [ongId]);
 
+  async function handleDeleteHelp(id) {
+    try {
+      await api.delete(`help/${id}`, {
+        headers: {
+          Authorization: ongId,
+        },
+      });
+
+      setHelp(helps.filter((help) => help.id !== id));
+    } catch (err) {
+      alert('Error deleting the case, try again.');
+    }
+  }
+
   return (
     <div className="profile-container">
 
@@ -54,7 +68,7 @@ export default function Profile() {
             <strong>VALUE:</strong>
             <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(help.value)}</p>
 
-            <button type="button">
+            <button onClick={() => handleDeleteHelp(help.id)} type="button">
               <FiTrash2 size={20} color="#A8A8B3" />
             </button>
           </li>
