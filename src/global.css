@@ -14,12 +14,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-input, button {
-  font: 400 18px 'Poppins', sans-serif;
+input, textarea {
+  font: 400 16px 'Poppins', sans-serif;
 }
 
-textarea {
-  font: 400 14px 'Poppins', sans-serif;
+button {
+  font: 400 18px 'Poppins', sans-serif;
 }
 
 button {
@@ -33,6 +33,18 @@ form input {
   border: 1px solid #DCDCE5;
   border-radius: 8px;
   padding: 0 24px;
+}
+
+form textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 140px;
+  height: 60px;
+  color: #A8A8B3;
+  border: 1px solid #DCDCE5;
+  border-radius: 8px;
+  padding: 16px 24px;
+  line-height: 24px;
 }
 
 .button {
