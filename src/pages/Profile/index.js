@@ -6,12 +6,18 @@ import logo from '../../assets/BeTheHelp.svg';
 import './styles.css';
 
 export default function Profile() {
+  const ongName = localStorage.getItem('ongName');
+
   return (
     <div className="profile-container">
 
       <header>
         <img src={logo} alt="Be the Help logo" />
-        <span>Welcome, ONG</span>
+        <span>
+          Welcome,
+          {' '}
+          {ongName}
+        </span>
         <Link className="button" to="/help/new">Register new case</Link>
         <button type="button">
           <FiPower size={18} color="#EA80FC" />
