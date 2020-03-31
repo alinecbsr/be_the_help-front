@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
-import logo from '../../assets/BeTheHelp.svg';
+
+import api from '../../services/api';
 
 import './styles.css';
 
+import logo from '../../assets/BeTheHelp.svg';
+
 export default function Profile() {
+  const [helps, setHelp] = useState([]);
+
+  const ongId = localStorage.getItem('ongId');
   const ongName = localStorage.getItem('ongName');
+
+  useEffect(() => {
+    api.get('profile', {
+      headers: {
+        Authorization: ongId,
+      },
+    }).then((response) => {
+      setHelp(response.data);
+    });
+  }, [ongId]);
 
   return (
     <div className="profile-container">
@@ -27,91 +43,22 @@ export default function Profile() {
       <h1>Registered cases</h1>
 
       <ul>
-        <li>
-          <strong>CASE:</strong>
-          <p>Summary case title help needed</p>
+        {helps.map((help) => (
+          <li key={help.id}>
+            <strong>CASE:</strong>
+            <p>{help.title}</p>
 
-          <strong>DESCRIPTION:</strong>
-          <p>
-            Detailed description, explaining the cause of the need,
-            help you need and benefits that the aid will allow, for example.
-          </p>
+            <strong>DESCRIPTION:</strong>
+            <p>{help.description}</p>
 
-          <strong>VALUE:</strong>
-          <p>U$ 30,00</p>
+            <strong>VALUE:</strong>
+            <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(help.value)}</p>
 
-          <button type="button">
-            <FiTrash2 size={20} color="#A8A8B3" />
-          </button>
-        </li>
-        <li>
-          <strong>CASE:</strong>
-          <p>Summary case title help needed</p>
-
-          <strong>DESCRIPTION:</strong>
-          <p>
-            Detailed description, explaining the cause of the need,
-            help you need and benefits that the aid will allow, for example.
-          </p>
-
-          <strong>VALUE:</strong>
-          <p>U$ 30,00</p>
-
-          <button type="button">
-            <FiTrash2 size={20} color="#A8A8B3" />
-          </button>
-        </li>
-        <li>
-          <strong>CASE:</strong>
-          <p>Summary case title help needed</p>
-
-          <strong>DESCRIPTION:</strong>
-          <p>
-            Detailed description, explaining the cause of the need,
-            help you need and benefits that the aid will allow, for example.
-          </p>
-
-          <strong>VALUE:</strong>
-          <p>U$ 30,00</p>
-
-          <button type="button">
-            <FiTrash2 size={20} color="#A8A8B3" />
-          </button>
-        </li>
-        <li>
-          <strong>CASE:</strong>
-          <p>Summary case title help needed</p>
-
-          <strong>DESCRIPTION:</strong>
-          <p>
-            Detailed description, explaining the cause of the need,
-            help you need and benefits that the aid will allow, for example.
-          </p>
-
-          <strong>VALUE:</strong>
-          <p>U$ 30,00</p>
-
-          <button type="button">
-            <FiTrash2 size={20} color="#A8A8B3" />
-          </button>
-        </li>
-        <li>
-          <strong>CASE:</strong>
-          <p>Summary case title help needed</p>
-
-          <strong>DESCRIPTION:</strong>
-          <p>
-            Detailed description, explaining the cause of the need,
-            help you need and benefits that the aid will allow, for example.
-          </p>
-
-          <strong>VALUE:</strong>
-          <p>U$ 30,00</p>
-
-          <button type="button">
-            <FiTrash2 size={20} color="#A8A8B3" />
-          </button>
-        </li>
+            <button type="button">
+              <FiTrash2 size={20} color="#A8A8B3" />
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   );
